@@ -1,26 +1,15 @@
-# Solution 2: Expand Around Peaks
-# Idea: Iterate through array, treat each element as a potential peak, expand left and right to find mountain length.
-# Time Complexity: O(n) — Each element visited at most twice
-# Space Complexity: O(1) — Only storing counters
 def main(nums):
     n = len(nums)
-    max_len = 0
-    for i in range(1, n - 1):
-        if nums[i] > nums[i - 1] and nums[i] > nums[i + 1]:
-            lp = i - 1
-            rp = i + 1
+    max_total = float("-inf")
 
-            while lp > 0 and nums[lp - 1] < nums[lp]:
-                lp -= 1
-
-            while rp < n - 1 and nums[rp + 1] < nums[rp]:
-                rp += 1
-
-            max_len = max(max_len, rp - lp + 1)
-
-    return max_len
+    for i in range(n):
+        total = 0
+        for j in range(i, n):
+            total += nums[j]
+            max_total = max(max_total, total)
+    return max_total
 
 
 if __name__ == "__main__":
-    args = [-1, 0, 1]
+    args = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     print(main(args))

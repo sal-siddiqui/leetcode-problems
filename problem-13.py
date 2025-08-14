@@ -1,33 +1,44 @@
 # https://leetcode.com/problems/contains-duplicate-ii/
 
-# Solution 1 - Brute Force
+# Solution 1: Brute Force Check
+# Idea: Compare every pair of indices (i, j) and check if values match and distance <= k.
+# Time Complexity: O(n^2) — nested loop comparison
+# Space Complexity: O(1) — no extra storage
 def main(nums, k):
-    for i in range(len(nums)):
-        for j in range(i + 1, len(nums)):
-            if nums[i] == nums[j] and abs(i - j) <= k:
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, min(i + k + 1, n)):
+            if nums[i] == nums[j]:
                 return True
     return False
 
 
-# Solution 2 - Hashmap
+# Solution 2: Hashmap for Last Seen Index
+# Idea: Store the last seen index of each number in a dictionary. When a duplicate is found, check if the index difference <= k.
+# Time Complexity: O(n) — each lookup and update is O(1)
+# Space Complexity: O(n) — dictionary stores last index for each unique number
 # def main(nums, k):
-#     hash_map = {}
-#     for index, item in enumerate(nums):
-#         if item in hash_map and abs(index - hash_map[item]) <= k:
+#     last_seen = {}
+#     for i, num in enumerate(nums):
+#         if num in last_seen and i - last_seen[num] <= k:
 #             return True
-#         hash_map[item] = index
+#         last_seen[num] = i
 #     return False
 
 
-# Solution 3 - Sliding Window
+# Solution 2: Sliding Window with Set
+# Idea: Use a set to store up to k previous numbers; if a duplicate is found, return True.
+# Remove numbers that slide out of the k-window.
+# Time Complexity: O(n) — each element added/removed at most once
+# Space Complexity: O(min(n, k)) — set stores at most k elements
 # def main(nums, k):
-#     window = set()
+#     seen = set()
 #     for i, num in enumerate(nums):
-#         if num in window:
+#         if num in seen:
 #             return True
-#         window.add(num)
-#         if len(window) > k:
-#             window.remove(nums[i - k])
+#         seen.add(num)
+#         if len(seen) > k:
+#             seen.remove(nums[i - k])
 #     return False
 
 

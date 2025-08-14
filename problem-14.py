@@ -1,26 +1,29 @@
 # https://leetcode.com/problems/minimum-absolute-difference/
 
-# Solution 1 - Brute Force
+# Solution 1: Brute Force Pair Comparison
+# Idea: Compare all possible pairs (i, j), track the minimum absolute difference,
+#       and collect all pairs with that difference.
+# Time Complexity: O(n^2) — check every pair
+# Space Complexity: O(n) — store pairs in result list
 def main(arr):
-    arr.sort()
+    n = len(arr)
     min_diff = float("inf")
-    pairs = []
-
-    for i in range(len(arr)):
-        for j in range(i + 1, len(arr)):
-            diff = arr[j] - arr[i]
-            if diff > min_diff:
-                break
+    result = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            diff = abs(arr[i] - arr[j])
             if diff < min_diff:
                 min_diff = diff
-                pairs = [[arr[i], arr[j]]]
+                result = [[min(arr[i], arr[j]), max(arr[i], arr[j])]]
             elif diff == min_diff:
-                pairs.append([arr[i], arr[j]])
-
-    return pairs
+                result.append([min(arr[i], arr[j]), max(arr[i], arr[j])])
+    return sorted(result)
 
 
 # Solution 2 - Sliding Window
+# Idea: Sorting arr ensures the minimum difference is between consecutive elements. Check adjacent pairs, track the smallest difference, and collect results.
+# Time Complexity: O(n log n) — sorting dominates
+# Space Complexity: O(1) extra — aside from result list
 # def main(arr):
 #     arr.sort()
 #     min_diff = float("inf")

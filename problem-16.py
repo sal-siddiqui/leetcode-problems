@@ -1,27 +1,25 @@
 # https://leetcode.com/problems/single-number/
 
 
-# Solution 1 - Brute Force
-# def main(nums):
-#     from collections import Counter
-
-#     counter = Counter(nums)
-
-#     for key, value in counter.items():
-#         if value == 1:
-#             return key
-#     return -1
-
-
-# Solution 2 - Bit Manipulation
-# XOR of two identical numbers is 0.
-# XOR with 0 gives the number itself.
-# XOR is commutative
+# Solution 1: Brute Force Using Count
+# Idea: For each number, count how many times it appears; return the one with count == 1.
+# Time Complexity: O(n^2) — counting for each element
+# Space Complexity: O(1) — no extra data structures
 def main(nums):
-    result = 0
     for num in nums:
-        result ^= num
-    return result
+        if nums.count(num) == 1:
+            return num
+
+
+# Solution 2: Bitwise XOR
+# Idea: XOR of two identical numbers is 0, and XOR with 0 is the number itself. XOR-ing all elements cancels duplicates, leaving the unique number.
+# Time Complexity: O(n) — single pass through array
+# Space Complexity: O(1) — only one variable to store result
+# def main(nums):
+#     result = 0
+#     for num in nums:
+#         result ^= num
+#     return result
 
 
 if __name__ == "__main__":

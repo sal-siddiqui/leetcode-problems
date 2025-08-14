@@ -1,22 +1,26 @@
 # https://leetcode.com/problems/minimum-size-subarray-sum/
 
-# Solution 1 - Brute Force
+# Solution 1: Brute Force Prefix Sum
+# Idea: For each starting index, try extending the subarray until the sum >= target, track the minimal length found.
+# Time Complexity: O(n^2) — nested loops for subarray sums
+# Space Complexity: O(1) — only variables for sum and min length
 def main(nums, target):
     n = len(nums)
     min_len = float("inf")
-
     for i in range(n):
-        total = 0
+        curr_sum = 0
         for j in range(i, n):
-            total += nums[j]
-            if total >= target:
+            curr_sum += nums[j]
+            if curr_sum >= target:
                 min_len = min(min_len, j - i + 1)
                 break
-
     return 0 if min_len == float("inf") else min_len
 
 
-# Solution 2 - Sliding Window
+# Solution 2: Sliding Window (Two Pointers)
+# Idea: Expand right pointer to increase sum, move left pointer to shrink window while keeping sum >= target. Track smallest valid window length.
+# Time Complexity: O(n) — each element visited at most twice
+# Space Complexity: O(1) — constant extra space
 # def main(nums, target):
 #     n = len(nums)
 #     lp = 0

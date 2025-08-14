@@ -12,15 +12,15 @@
 #         return sum(self.nums[left : right + 1])
 
 
-# Solution 2 - Prefix Sum for O(1) queries
-# Idea: Precompute prefix sums so we can get range sum in constant time.
-# Time Complexity: O(n) preprocessing, O(1) per query
-# Space Complexity: O(n) extra
+# Solution 2: Prefix Sum Precomputation
+# Idea: Precompute prefix sums so that range sum can be calculated in O(1): sumRange(l, r) = prefix[r+1] - prefix[l]
+# Time Complexity: O(n) for init, O(1) per query
+# Space Complexity: O(n) — store prefix sum array
 class NumArray:
     def __init__(self, nums):
-        self._prefix = [0]
+        self.prefix = [0]
         for num in nums:
-            self._prefix.append(self._prefix[-1] + num)
+            self.prefix.append(self.prefix[-1] + num)
 
-    def sum_range(self, left, right):
-        return self._prefix[right + 1] - self._prefix[left]
+    def sumRange(self, left, right):
+        return self.prefix[right + 1] - self.prefix[left]
