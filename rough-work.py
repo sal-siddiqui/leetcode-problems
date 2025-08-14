@@ -1,15 +1,26 @@
-class NumArray:
-    def __init__(self, nums):
-        self.nums = nums
+# Solution 2: Expand Around Peaks
+# Idea: Iterate through array, treat each element as a potential peak, expand left and right to find mountain length.
+# Time Complexity: O(n) — Each element visited at most twice
+# Space Complexity: O(1) — Only storing counters
+def main(nums):
+    n = len(nums)
+    max_len = 0
+    for i in range(1, n - 1):
+        if nums[i] > nums[i - 1] and nums[i] > nums[i + 1]:
+            lp = i - 1
+            rp = i + 1
 
-        self._prefix_sums = [0]
-        for num in self.nums:
-            self._prefix_sums.append(self._prefix_sums[-1] + num)
+            while lp > 0 and nums[lp - 1] < nums[lp]:
+                lp -= 1
 
-    def sum_range(self, left, right):
-        return self._prefix_sums[right + 1] - self._prefix_sums[left]
+            while rp < n - 1 and nums[rp + 1] < nums[rp]:
+                rp += 1
+
+            max_len = max(max_len, rp - lp + 1)
+
+    return max_len
 
 
 if __name__ == "__main__":
-    temp = NumArray([-2, 0, 3, -5, 2, -1])
-    print(temp)
+    args = [-1, 0, 1]
+    print(main(args))
