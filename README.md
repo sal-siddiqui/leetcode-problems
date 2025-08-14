@@ -6,6 +6,6 @@ This is my attempt at practicing data structures & algorithms. I am following th
 
 ## ▶️ Checkpoint
 
-**Video Link**: https://youtu.be/lvO88XxNAzs?si=PhVUA16OQYIdbJnU&t=7910 <br />
+**Video Link**: https://youtu.be/lvO88XxNAzs?si=PhVUA16OQYIdbJnU <br />
 **Timestamp**: 2:11:50 <br />
 **Question**: 303. Range Sum Query - Immutable <br />

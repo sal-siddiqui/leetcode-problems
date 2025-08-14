@@ -1,14 +1,15 @@
-def main(nums):
-    mapping = {}
-    sorted_nums = sorted(nums)
+class NumArray:
+    def __init__(self, nums):
+        self.nums = nums
 
-    for i, num in enumerate(sorted_nums):
-        if num not in mapping:
-            mapping[num] = i
+        self._prefix_sums = [0]
+        for num in self.nums:
+            self._prefix_sums.append(self._prefix_sums[-1] + num)
 
-    return [mapping[num] for num in nums]
+    def sum_range(self, left, right):
+        return self._prefix_sums[right + 1] - self._prefix_sums[left]
 
 
 if __name__ == "__main__":
-    args = [6, 5, 4, 8]
-    print(main(args))
+    temp = NumArray([-2, 0, 3, -5, 2, -1])
+    print(temp)
