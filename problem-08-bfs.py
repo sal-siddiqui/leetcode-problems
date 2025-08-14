@@ -2,7 +2,6 @@
 
 ##  BFS Template
 # from collections import deque
-
 # def bfs(<starting-node>):
 #     queue = deque([<starting-node>])
 #     visited.add(<starting-node>)
@@ -26,6 +25,9 @@
 from collections import deque
 
 
+# Solution 1 - BFS with visited set
+# Time Complexity: O(m * n) — each cell is visited at most once
+# Space Complexity: O(m * n) — for the visited set and BFS queue
 def main(grid):
     rows, cols = len(grid), len(grid[0])
     visited = set()
@@ -68,5 +70,10 @@ def main(grid):
 
 
 if __name__ == "__main__":
-    args = [["1", "1", "1", "1", "0"], ["1", "1", "0", "1", "0"], ["1", "1", "0", "0", "0"], ["0", "0", "0", "0", "0"]]
+    args = [
+        ["1", "1", "1", "1", "0"],
+        ["1", "1", "0", "1", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "0", "0", "0"],
+    ]
     print(main(args))

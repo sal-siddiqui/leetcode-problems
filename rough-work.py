@@ -1,11 +1,14 @@
-# rough work
+def main(nums):
+    mapping = {}
+    sorted_nums = sorted(nums)
 
+    for i, num in enumerate(sorted_nums):
+        if num not in mapping:
+            mapping[num] = i
 
-# Solution 1 - ...
-def main():
-    pass
+    return [mapping[num] for num in nums]
 
 
 if __name__ == "__main__":
-    args = ...
+    args = [6, 5, 4, 8]
     print(main(args))

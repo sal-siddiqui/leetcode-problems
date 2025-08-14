@@ -1,27 +1,30 @@
 # https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/
 
-
-# def main(lst):
+# Solution 1 - Brute Force
+# Time Complexity: O(n^2) — compare each element with all others
+# Space Complexity: O(n) — store the result array
+# def main(nums):
 #     result = []
-#     for i in range(len(lst)):
+#     for i in range(len(nums)):
 #         count = 0
-#         current_value = lst[i]
-#         for j in range(len(lst)):
-#             if lst[j] < current_value:
+#         for j in range(len(nums)):
+#             if j != i and nums[j] < nums[i]:
 #                 count += 1
 #         result.append(count)
 #     return result
 
+# Solution 2 - Sorting with Counting
+# Time Complexity: O(n log n) — sort the array
+# Space Complexity: O(n) — store indices and results
+def main(nums):
+    sorted_nums = sorted(nums)
+    mapping = {}
 
-def main(lst):
-    sorted_lst = sorted(lst)
-    position_map = {}
+    for i, num in enumerate(sorted_nums):
+        if num not in mapping:
+            mapping[num] = i
 
-    for index, item in enumerate(sorted_lst):
-        if item not in position_map:
-            position_map[item] = index
-
-    return [position_map[item] for item in lst]
+    return [mapping[item] for item in nums]
 
 
 if __name__ == "__main__":
