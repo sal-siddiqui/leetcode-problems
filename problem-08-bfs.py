@@ -32,29 +32,30 @@ def main(grid):
     rows, cols = len(grid), len(grid[0])
     visited = set()
 
-    def neighbors(r, c):
+    def neighbors(node):
+        r, c = node
         return [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]
 
-    def is_valid(neighbor):
-        row, col = neighbor
+    def is_valid(node):
+        r, c = node
 
-        if row < 0 or row >= rows:
+        if r < 0 or r >= rows:
             return False
-        if col < 0 or col >= cols:
+        if c < 0 or c >= cols:
             return False
-        if grid[row][col] != "1":  # noqa: SIM103
+        if grid[r][c] != "1":  # noqa: SIM103
             return False
 
         return True
 
-    def bfs(r, c):
-        queue = deque([(r, c)])
-        visited.add((r, c))
+    def bfs(node):
+        queue = deque([node])
+        visited.add(node)
 
         while queue:
-            row, col = queue.popleft()
+            node = queue.popleft()
 
-            for neighbor in neighbors(row, col):
+            for neighbor in neighbors(node):
                 if neighbor not in visited and is_valid(neighbor):
                     visited.add(neighbor)
                     queue.append(neighbor)
@@ -64,7 +65,7 @@ def main(grid):
         for c in range(cols):
             if grid[r][c] == "1" and (r, c) not in visited:
                 islands += 1
-                bfs(r, c)
+                bfs((r, c))
 
     return islands
 
@@ -73,7 +74,7 @@ if __name__ == "__main__":
     args = [
         ["1", "1", "1", "1", "0"],
         ["1", "1", "0", "1", "0"],
-        ["1", "1", "0", "0", "0"],
-        ["0", "0", "0", "0", "0"],
+        ["1", "1", "0", "0", "1"],
+        ["0", "0", "0", "1", "1"],
     ]
     print(main(args))
